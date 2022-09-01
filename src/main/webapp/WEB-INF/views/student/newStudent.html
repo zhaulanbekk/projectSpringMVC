@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"  xmlns="http://www.w3.org/1999/xhtml"
-     xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,7 +8,7 @@
     <title>Document</title>
     <style>
         body{
-            background-image: url('https://krot.info/uploads/posts/2021-11/1636610619_1-krot-info-p-krasivii-rassvet-na-more-krasivoe-foto-2.jpg');
+            background-image: url('https://vsegda-pomnim.com/uploads/posts/2022-04/1651029328_1-vsegda-pomnim-com-p-rassvet-na-more-foto-1.jpg');
         }
         form {
             width: 500px;
@@ -45,28 +45,23 @@
     </style>
 </head>
 <body>
-<div>
     <form  th:method="POST"
-           th:action="@{/courses/{id}/saveCourse(id=${companyId})}"
-           th:object="${course}"
+           th:action="@{/students/{id}/save(id=${companyId})}"
+           th:object="${student}"
            style="width: 50%">
         <label>
-            <input name="Course name" th:field="*{courseName}" placeholder="Course name" type="text" />
+            <input name="Course name" th:field="*{firstName}" placeholder="First name" type="text" />
         </label>
         <label>
-            <input name="Date of start" th:field="*{dateOfStart}" placeholder="Date of start" type="date" />
+            <input name="Date of start" th:field="*{lastName}" placeholder="Last name" type="text" />
         </label>
         <label>
-            <input name="Description" th:field="*{description}" placeholder="Description" type="text" />
+            <input name="Description" th:field="*{email}" placeholder="Email" type="text" />
         </label>
         <label>
-            <input name="Image" th:field="*{image}" placeholder="Image" type="text" />
-        </label>
-        <label>
-            <input name="Duration"  th:field="*{duration}" placeholder="Duration" type="text" />
+            <input name="Image" th:field="*{studyFormat}" placeholder="Study Format" type="text" />
         </label>
         <input class="button" type="submit" value="save" />
     </form>
-</div>
 </body>
 </html>

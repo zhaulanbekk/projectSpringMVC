@@ -40,8 +40,8 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void deleteCourse(Long id, Course course) {
-        courseDao.deleteCourse(id,course );
+    public void deleteCourse(Long id) {
+        courseDao.deleteCourse(id );
     }
 
     @Override

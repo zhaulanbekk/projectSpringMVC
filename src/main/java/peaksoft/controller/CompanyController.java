@@ -24,7 +24,6 @@ public class CompanyController {
         return "/company/allCompany";
     }
 
-
     @GetMapping("/new")
     public String newCompany(Model model) {
         model.addAttribute("company", new Company());
@@ -44,11 +43,11 @@ public class CompanyController {
     }
 
     @PostMapping("{id}/updateCompany")
-    public String saveUpdateCompany(@ModelAttribute("company") Company company, @PathVariable("id") Long id) {
+    public String saveUpdateCompany(@ModelAttribute("company") Company company,
+                                    @PathVariable("id") Long id) {
         companyService.updateCompany(id, company);
         return "redirect:/companies";
     }
-
 
     @PostMapping("/delete/{id}")
     public String deleteCompany(@PathVariable("id") Long id) {
@@ -56,9 +55,4 @@ public class CompanyController {
         return "redirect:/companies";
     }
 
-    @GetMapping("/course/{id}")
-    public String getCompanyById(@PathVariable Long id) {
-        companyService.getCompanyById(id);
-        return "course/allCourses";
-    }
 }

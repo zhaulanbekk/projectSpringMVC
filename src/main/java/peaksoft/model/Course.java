@@ -31,9 +31,6 @@ public class Course {
     private String image;
     private String description;
 
-//    @Transient
-//    private Long companyId;
-
     public Course(String courseName, LocalDate dateOfStart, int duration, String image, String description) {
         this.courseName = courseName;
         this.dateOfStart = dateOfStart;
@@ -42,18 +39,24 @@ public class Course {
         this.description = description;
     }
 
-    @ManyToOne(cascade = {MERGE, DETACH, REFRESH},fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {MERGE, DETACH, REFRESH}, fetch = FetchType.LAZY)
     private Company company;
 
-    @ManyToMany(cascade = {DETACH, MERGE, PERSIST, REFRESH},mappedBy = "courseList")
+    @ManyToMany(cascade = {DETACH, MERGE, PERSIST, REFRESH}, mappedBy = "courseList")
     private List<Instructor> instructorList;
 
-    @OneToMany(cascade = ALL,mappedBy = "course")
-    private List<Student> studentList;
-
-    public void addInstructor(Instructor instructor){
+    public void addInst(Instructor instructor) {
         instructorList.add(instructor);
     }
 
+    @OneToMany(cascade = ALL, mappedBy = "course")
+    private List<Student> studentList;
 
+    @OneToMany(cascade = ALL, mappedBy = "course")
+    private List<Lesson> lessonList;
+
+
+    public void addLesson(Lesson lesson) {
+        lessonList.add(lesson);
+    }
 }

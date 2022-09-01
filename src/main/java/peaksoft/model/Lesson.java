@@ -24,7 +24,7 @@ public class Lesson {
         this.lessonName = lessonName;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
     @JoinColumn(name = "course_id")
     private Course course;
 
@@ -33,4 +33,8 @@ public class Lesson {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Video video;
+
+    public void addTask(Task task){
+        taskList.add(task);
+    }
 }

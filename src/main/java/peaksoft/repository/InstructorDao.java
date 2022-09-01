@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface InstructorDao {
 
-    List<Instructor> getAllInstructors();
+    List<Instructor> getAllInstructors(Long id);
 
-    void addInstructor(Instructor instructor);
+    Instructor addInstructor(Long id,Instructor instructor);
 
     Instructor getInstructorById(Long id);
 
-    void updateInstructor(Long id,Instructor instructor);
+    Instructor updateInstructor(Long id,Instructor instructor);
 
-    void deleteInstructor(Instructor instructor);
+    void deleteInstructor(Long id);
 
-    void assignInstructorToCourse(Long courseId, Long instructorId);
+    void assignInstructorToCourse( Long instructorId, Long courseId);
 }

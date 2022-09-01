@@ -5,70 +5,85 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import peaksoft.model.Course;
+import peaksoft.model.Instructor;
 import peaksoft.service.CompanyService;
 import peaksoft.service.CourseService;
+import peaksoft.service.InstructorService;
 
 @Controller
-@RequestMapping("/courses/{id}")
+@RequestMapping("/courses")
 public class CourseController {
     private final CourseService courseService;
     private final CompanyService companyService;
+    private final InstructorService instructorService;
 
     @Autowired
-    public CourseController(CourseService courseService, CompanyService companyService) {
+    public CourseController(CourseService courseService, CompanyService companyService, InstructorService instructorService) {
         this.courseService = courseService;
         this.companyService = companyService;
+        this.instructorService = instructorService;
     }
 
-    @GetMapping
-    public String allCourses(@PathVariable("id") Long id, Model model) {
+    @GetMapping("/{id}")
+    public String allCourses(@PathVariable("id") Long id, Model model,
+                             @ModelAttribute("inst") Instructor instructor) {
         model.addAttribute("courses", courseService.getAllCourses(id));
-        model.addAttribute("companyId", companyService.getCompanyById(id));
+        model.addAttribute("companyId", id);
+        model.addAttribute("instructors", instructorService.getAllInstructors(id));
         return "course/allCourses";
     }
 
-
-    @GetMapping("/add")
+    @GetMapping("/add/{id}")
     public String addCourses(Model model, @PathVariable Long id) {
-        // model.addAttribute("companyId", id);
-//        model.addAttribute("companyId",companyService.getCompanyById(id));
         model.addAttribute("course", new Course());
+        model.addAttribute("companyId", id);
         return "course/newCourse";
     }
 
-    @PostMapping("/saveCourse")
-    public String saveCourses(@ModelAttribute("course") Course course, @PathVariable("id") Long id) {
-        Course course1 = courseService.courseService(course);
+    @PostMapping("/{id}/saveCourse")
+    public String saveCourses(@ModelAttribute("course") Course course,
+                              @PathVariable("id") Long id) {
+        Course course1 = new Course();
+        course1.setCourseName(course.getCourseName());
+        course1.setImage(course.getImage());
+        course1.setDuration(course.getDuration());
+        course1.setDescription(course.getDescription());
         course1.setCompany(companyService.getCompanyById(id));
         courseService.addCourse(id, course1);
-        return "redirect:/courses/ "+id;
+        return "redirect:/courses/" + id;
     }
 
-    @GetMapping("/updateCourse")
-    public String updateCourse(Model model,  @PathVariable Long id) {
-       model.addAttribute("course",courseService.getCourseById(id)) ;
+    @GetMapping("/updateCourse/{id}/{companyId}")
+    public String updateCourse(Model model, @PathVariable Long id,
+                               @PathVariable("companyId") Long companyId) {
+        model.addAttribute("course", courseService.getCourseById(id));
         return "/course/updateCourse";
     }
-    @PostMapping("/editCourse")
-    public String saveUpdateCourse(@PathVariable("id") Long id, @ModelAttribute Course course) {
+
+    @PostMapping("/{id}/{companyId}/editCourse")
+    public String saveUpdateCourse(@PathVariable("id") Long id,
+                                   @PathVariable("companyId") Long companyId,
+                                   @ModelAttribute Course course) {
+        course.setCompany(companyService.getCompanyById(companyId));
         courseService.updateCourse(id, course);
+        return "redirect:/courses/{companyId}";
+    }
+
+    @PostMapping("{id}/{courseId}/delete")
+    public String deleteCourse(@PathVariable Long id,
+                               @PathVariable("courseId") Long id2) {
+        courseService.deleteCourse(id2);
         return "redirect:/courses/{id}";
     }
-    @PostMapping("/delete")
-    public String deleteCourse(@PathVariable Long id,Course course){
-        courseService.deleteCourse(id,course );
-        courseService.getCourseById(id);
 
-        return "redirect:/course/allCourses";
+    @PostMapping("/{companyId}/{courseId}/saveAssign")
+    private String saveAssign(@PathVariable("courseId") Long courseId,
+                              @ModelAttribute("inst") Instructor instructor,
+                              @PathVariable("companyId") Long compId) {
+        System.out.println(instructor);
+        instructorService.assignInstructorToCourse(instructor.getId(), courseId);
+        return "redirect:/courses/" + compId;
     }
-
-//    @GetMapping("/getCourse/{courseId}")
-//    public String getCourseById(@PathVariable("courseId")Long id,Model model) {
-//        model.addAttribute("course",courseService.getCourseById(id));
-//        return "course/allCourses";
-//    }
-//
-//
 }
 
 

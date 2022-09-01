@@ -5,13 +5,13 @@ import peaksoft.model.Lesson;
 import java.util.List;
 
 public interface LessonDao {
-    List<Lesson> getAllLessons();
+    List<Lesson> getAllLessons(Long id);
 
-    void addLesson(Lesson lesson);
+    Lesson addLesson(Long id,Lesson lesson);
 
     Lesson getLessonById(Long id);
 
-    void updateLesson(Long id,Lesson lesson);
+    Lesson updateLesson(Long id,Lesson lesson);
 
-    void deleteLesson(Lesson lesson);
+    void deleteLesson(Long id);
 }

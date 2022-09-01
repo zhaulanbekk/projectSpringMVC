@@ -11,25 +11,18 @@
             background-image: url("https://rosakhutor.com/upload/iblock/552/552cbd5587fad03449e757ec5bca06a1.jpg");
         }
         form {
-            margin: 0 auto;
             width: 500px;
             height: 500px;
             border: 1px solid black;
             box-shadow: 2px 5px 40px 20px;
-            display: grid;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
-        }
-        .wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
+        }
+        div {
+            display: flex;
             justify-content: center;
+            padding-top: 10%;
         }
         input {
             width: 300px;
@@ -48,23 +41,17 @@
 </head>
 <body>
 <div>
-    <form  th:method="PATCH" th:action="@{/courses/{id}/{companyId}/editCourse (id=${course.getId()},companyId=${companyId})}" th:object="${course}" style="width: 50%">
-        <div class="wrapper">
-            <input name="Course name" th:field="*{courseName}"  placeholder="Course name" type="text" />
+    <form  th:method="PATCH"
+           th:action="@{/videos/{id}/{lessonId}/editVideo(id=${video.getId()},lessonId=${lessonId})}"
+           th:object="${video}" style="width: 50%">
         <label>
-            <input name="Date of start" th:field="*{dateOfStart}" placeholder="Date of start" type="date" />
+            <input name="Video name" th:field="*{videoName}"  placeholder="Video Name" type="text" />
+
+            <label>
+                <input name="Video link" th:field="*{link}" placeholder="Video link" type="text" />
+            </label>
+            <input class="button" type="submit" value="update" >
         </label>
-        <label>
-            <input name="Description" th:field="*{description}" placeholder="Description" type="text" />
-        </label>
-        <label>
-            <input name="Image" th:field="*{image}" placeholder="Image" type="text" />
-        </label>
-        <label>
-            <input name="Duration" th:field="*{duration}" placeholder="Duration" type="text" />
-        </label>
-        <input class="button" type="submit" value="update" >
-        </div>
     </form>
 </div>
 </body>

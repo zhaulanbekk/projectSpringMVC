@@ -7,6 +7,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
+import static javax.persistence.CascadeType.*;
+
 @Entity
 @Table(name = "instructors")
 @NoArgsConstructor
@@ -34,9 +36,15 @@ public class Instructor {
         this.email = email;
         this.specialization = specialization;
     }
-    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
     private List<Course> courseList;
+
+    public void addCourse(Course course){
+        courseList.add(course);
+    }
+
+    @ManyToOne(cascade = {DETACH, MERGE, REFRESH},fetch = FetchType.LAZY)
+    private Company company;
 
 
 }

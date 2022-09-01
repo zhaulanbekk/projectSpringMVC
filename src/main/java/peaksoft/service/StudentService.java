@@ -1,10 +1,10 @@
-package peaksoft.repository;
+package peaksoft.service;
 
 import peaksoft.model.Student;
 
 import java.util.List;
 
-public interface StudentDao {
+public interface StudentService {
     List<Student> getAllStudents(Long id);
 
     void addStudent(Long id,Student student);
@@ -16,6 +16,4 @@ public interface StudentDao {
     void deleteStudent(Long id);
 
     void assignCourse(Long courseId, Student student);
-
-
 }

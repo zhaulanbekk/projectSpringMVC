@@ -14,7 +14,8 @@
             height: 40px;
             color: rgb(240, 222, 178);
         }
-        td{
+
+        td {
             width: 300px;
             text-align: center;
         }
@@ -46,11 +47,13 @@
             border: none;
             background: rgba(255, 255, 255, 0.3);
         }
-       button {
-           border:none;
-           outline: none;
-           border-radius: 10px;
-       }
+
+        button {
+            border: none;
+            outline: none;
+            border-radius: 10px;
+        }
+
         form {
             display: flex;
             flex-direction: column;
@@ -66,8 +69,10 @@
             <th>ID</th>
             <th>Company name</th>
             <th>Located Country</th>
-            <th>Delete</th>
+            <th>Update</th>
             <th>courses</th>
+            <th>Instructors</th>
+            <th>Students</th>
             <th>Delete</th>
         </tr>
         <tr class="up" th:each="company : ${companies}">
@@ -80,9 +85,18 @@
                 </a>
             </td>
             <td>
-                <a th:href="@{/companies/course/{id}(id=${company.getId()})}">
-                    <button style="height: 40px;width: 80px;background-color: yellow">course
-                    </button>
+                <a th:href="@{/courses/{id}(id=${company.getId()})}">
+                    <button style="height: 40px;width: 80px;background-color: yellow">course</button>
+                </a>
+            </td>
+            <td>
+                <a th:href="@{/instructors/{id}(id=${company.getId()})}">
+                    <button style="height: 40px;width: 80px;background-color: green">Instructors</button>
+                </a>
+            </td>
+            <td>
+                <a th:href="@{/students/{id}(id=${company.getId()})}">
+                    <button style="height: 40px;width: 80px;background-color: red">Students</button>
                 </a>
             </td>
             <td>
@@ -95,76 +109,9 @@
         </tr>
     </table>
     <form>
-        <input  type="button" value="Add company"
+        <input type="button" value="Add company"
                onclick="window.location.href = 'companies/new'"/>
-            </form>
-        </div>
-        </body>
-        </html>
-        <!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns="http://www.w3.org/1999/xhtml"-->
-<!--      xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Companies</title>-->
-<!--    <style>table,-->
-<!--    td {-->
-<!--        margin-top: 200px;-->
-<!--        margin-left: auto;-->
-<!--        margin-right: auto;-->
-<!--        font-size: 25px;-->
-<!--    }-->
-
-<!--    thead,-->
-<!--    tfoot {-->
-<!--        background-color: #e8e5e5;-->
-<!--        color: #344712;-->
-<!--    }-->
-<!--    body{-->
-<!--        background-color: burlywood;-->
-<!--    }-->
-
-
-<!--    </style>-->
-
-<!--</head>-->
-<!--<body>-->
-<!--<table class="table table-bordered ">-->
-<!--    <thead class="table-dark">-->
-<!--    <tr>-->
-<!--        <th scope="col">Id</th>-->
-<!--        <th scope="col">Company name</th>-->
-<!--        <th scope="col">Located country</th>-->
-<!--        <th scope="col">Update</th>-->
-<!--        <th scope="col">courses</th>-->
-<!--        <th scope="col">Delete</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody class="table-success">-->
-<!--    <tr th:each="company : ${companies}">-->
-<!--        <td th:text="${company.id}"></td>-->
-<!--        <td th:text="${company.companyName}"></td>-->
-<!--        <td th:text="${company.locatedCountry}"></td>-->
-
-<!--        <td><a th:href="@{/companies/update/{id}(id=${company.getId()})}">-->
-<!--            <button style="height: 40px; width: 80px; background-color:blue;">update</button>-->
-<!--        </a>-->
-<!--        </td>-->
-<!--        <td><a th:href="@{/companies/course/{id}(id=${company.getId()})}">-->
-<!--            <button style="height: 40px;width: 80px;background-color: yellow">courses-->
-<!--            </button>-->
-<!--        </a>-->
-<!--        </td>-->
-<!--        <td>-->
-<!--            <form th:method="DELETE" th:action="@{/companies/delete/{id}(id=${company.getId()})}">-->
-<!--                <input type="submit" value="delete" style="height: 40px; width: 80px; background-color:darkorange;"/>-->
-<!--            </form>-->
-<!--        </td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--</table>-->
-<!--<br><br><br><br>-->
-<!--<input style=" display: block; margin:auto; font-size:30px; border-radius: 20px" type="button" value="Add company"-->
-<!--       onclick="window.location.href = 'companies/new'">-->
-<!--</body>-->
-<!--</html>-->
+    </form>
+</div>
+</body>
+</html>

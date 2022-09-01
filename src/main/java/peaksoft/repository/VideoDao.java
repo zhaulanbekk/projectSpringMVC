@@ -5,13 +5,13 @@ import peaksoft.model.Video;
 import java.util.List;
 
 public interface VideoDao {
-    List<Video> getAllVideos();
+    List<Video> getAllVideos(Long id);
 
-    void addVideo(Long taskId,Video video);
+    Video addVideo(Long id, Video video);
 
     Video getVideoById(Long id);
 
     void updateVideo(Long id,Video video);
 
-    void deleteVideo(Video video);
+    void deleteVideo(Long id);
 }

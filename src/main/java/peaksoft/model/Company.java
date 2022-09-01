@@ -32,9 +32,20 @@ public class Company {
     public void addCourse(Course course) {
         courseList.add(course);
     }
+    public void addInst(Instructor instructor){
+        instructorList.add(instructor);
+    }
+
+    public void addStudent(Student student){
+        studentList.add(student);
+    }
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "company")
     private List<Student> studentList;
+
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "company")
+    private List<Instructor>instructorList;
 
     public Long getId() {
         return id;
@@ -59,4 +70,29 @@ public class Company {
     public void setLocatedCountry(String locatedCountry) {
         this.locatedCountry = locatedCountry;
     }
+
+    public List<Course> getCourseList() {
+        return courseList;
+    }
+
+    public void setCourseList(List<Course> courseList) {
+        this.courseList = courseList;
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
+    }
+
+    public List<Instructor> getInstructorList() {
+        return instructorList;
+    }
+
+    public void setInstructorList(List<Instructor> instructorList) {
+        this.instructorList = instructorList;
+    }
+
 }

@@ -13,7 +13,7 @@ public interface CourseService {
 
     void updateCourse(Long id,Course course);
 
-    void deleteCourse(Long id,Course course);
+    void deleteCourse(Long id);
 
     Course courseService(Course course);
 
